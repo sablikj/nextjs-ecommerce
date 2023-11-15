@@ -24,6 +24,6 @@ export async function incrementProductQuantity(productId: string) {
     });
   }
 
-  // Page refres to update the cart
+  // Page refresh to update the cart
   revalidatePath("/products/[id]");
 }

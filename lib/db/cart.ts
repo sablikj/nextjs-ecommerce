@@ -2,10 +2,17 @@ import { Prisma } from "@prisma/client";
 import prisma from "./prisma";
 import { cookies } from "next/dist/client/components/headers";
 
+// Cart with product data
 export type CartWithProducts = Prisma.CartGetPayload<{
   include: { items: { include: { product: true } } };
 }>;
 
+// One card item with product data
+export type CartItemWithProduct = Prisma.CartItemGetPayload<{
+  include: { product: true };
+}>;
+
+// Cart with product data and extra fields
 export type ShoppingCart = CartWithProducts & {
   size: number;
   subtotal: number;

@@ -1,5 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
+# Next.js E-commerce
+* E-commerce example app with Google auth integration
+* Based on a tutorial from [Coding in Flow](https://www.youtube.com/channel/UC_Fh8kvtkVPkeihBs42jGcA)
+ 
+## Used Libraries
+* Prisma
+* MongoDB
+* Next Auth
+* ZOD
+* TailwindCSS
+  
 ## Getting Started
 
 First, run the development server:

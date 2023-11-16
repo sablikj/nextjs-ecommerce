@@ -1,4 +1,4 @@
-import prisma from "@/lib/db/prisma";
+import { prisma } from "@/lib/db/prisma";
 import Image from "next/image";
 import ProductCard from "./(components)/ProductCard";
 import Link from "next/link";

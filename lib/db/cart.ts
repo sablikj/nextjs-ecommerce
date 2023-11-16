@@ -1,5 +1,5 @@
 import { Cart, CartItem, Prisma } from "@prisma/client";
-import prisma from "./prisma";
+import { prisma } from "@/lib/db/prisma";
 import { cookies } from "next/dist/client/components/headers";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
@@ -112,6 +112,21 @@ export async function mergeAnonCartIntoUserCart(userId: string) {
         where: { cartId: userCart.id },
       });
 
+      // Updating items through the cart model so that the lastUpdated value changes
+      await tx.cart.update({
+        where: { id: userCart.id },
+        data: {
+          items: {
+            createMany: {
+              data: mergedCartItems.map((item) => ({
+                productId: item.productId,
+                quantity: item.quantity,
+              })),
+            },
+          },
+        },
+      });
+      /*
       await tx.cartItem.createMany({
         // Mapping to remove id field from cartItem
         data: mergedCartItems.map((item) => ({
@@ -119,7 +134,7 @@ export async function mergeAnonCartIntoUserCart(userId: string) {
           productId: item.productId,
           quantity: item.quantity,
         })),
-      });
+      });*/
     } else {
       // Create new user cart and populating it with items from local cart
       await tx.cart.create({
